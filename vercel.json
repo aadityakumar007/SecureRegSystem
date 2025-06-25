@@ -1,0 +1,43 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "src/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "src/server.js"
+    },
+    {
+      "src": "/css/(.*)",
+      "dest": "public/css/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "public/js/$1"
+    },
+    {
+      "src": "/images/(.*)",
+      "dest": "public/images/$1"
+    },
+    {
+      "src": "/(.*\\.(html|css|js|png|jpg|jpeg|gif|ico|svg))",
+      "dest": "public/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "src/server.js"
+    }
+  ],
+  "functions": {
+    "src/server.js": {
+      "maxDuration": 10
+    }
+  },
+  "env": {
+    "NODE_ENV": "production"
+  }
+} 

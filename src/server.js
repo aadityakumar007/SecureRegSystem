@@ -93,7 +93,13 @@ app.use(helmet({
 // Basic middleware
 app.use(cors({
     credentials: true,
-    origin: process.env.NODE_ENV === 'production' ? false : true
+    origin: process.env.NODE_ENV === 'production' 
+        ? [
+            'https://secure-reg-system.vercel.app',
+            /\.vercel\.app$/,
+            process.env.FRONTEND_URL
+          ].filter(Boolean)
+        : true
 }));
 app.use(cookieParser());
 app.use(express.json());
