@@ -1,16 +1,13 @@
-const crypto = require('crypto');
-
-// Simple CSRF token handler for Vercel serverless
-module.exports = async (req, res) => {
+// Simple CSRF token endpoint for Vercel
+export default function handler(req, res) {
     // Set CORS headers
     res.setHeader('Access-Control-Allow-Credentials', true);
-    res.setHeader('Access-Control-Allow-Origin', req.headers.origin || '*');
-    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT');
-    res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization');
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader('Access-Control-Allow-Methods', 'GET,OPTIONS');
+    res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token, X-Requested-With, Accept, Content-Type, Authorization');
 
     if (req.method === 'OPTIONS') {
-        res.status(200).end();
-        return;
+        return res.status(200).end();
     }
 
     if (req.method !== 'GET') {
@@ -22,15 +19,10 @@ module.exports = async (req, res) => {
 
     try {
         // Generate a simple CSRF token
+        const crypto = require('crypto');
         const token = crypto.randomBytes(32).toString('hex');
         
-        console.log(`[CSRF] Generated token for client: ${token.substring(0, 8)}...`);
-        console.log(`[CSRF] Request from: ${req.headers.origin || 'unknown'}`);
-        
-        // Set token in cookie for stateless verification
-        res.setHeader('Set-Cookie', [
-            `csrfToken=${token}; HttpOnly; SameSite=Lax; Path=/; ${process.env.NODE_ENV === 'production' ? 'Secure;' : ''}`
-        ]);
+        console.log(`[CSRF] Generated token: ${token.substring(0, 8)}...`);
         
         res.status(200).json({ 
             success: true,
@@ -38,11 +30,10 @@ module.exports = async (req, res) => {
         });
         
     } catch (error) {
-        console.error('[CSRF] Error generating token:', error);
+        console.error('[CSRF] Error:', error);
         res.status(500).json({ 
             success: false, 
-            message: 'Failed to generate CSRF token',
-            error: error.message 
+            message: 'Failed to generate CSRF token' 
         });
     }
-}; 
+} 
