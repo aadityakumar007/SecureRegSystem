@@ -1,5 +1,5 @@
 // Simple test endpoint for Vercel
-export default function handler(req, res) {
+module.exports = async (req, res) => {
     // Set CORS headers
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -19,4 +19,4 @@ export default function handler(req, res) {
         method: req.method,
         url: req.url
     });
-} 
+}; 

@@ -16,6 +16,10 @@
       "dest": "/api/health.js"
     },
     {
+      "src": "/api/debug",
+      "dest": "/api/debug.js"
+    },
+    {
       "src": "/api/csrf-token",
       "dest": "/api/csrf-token.js"
     },

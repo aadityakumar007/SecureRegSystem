@@ -1,5 +1,5 @@
 // Health check endpoint
-export default function handler(req, res) {
+module.exports = async (req, res) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Content-Type', 'application/json');
     
@@ -8,4 +8,4 @@ export default function handler(req, res) {
         message: 'API is working',
         timestamp: new Date().toISOString()
     });
-} 
+}; 

@@ -1,5 +1,7 @@
+const crypto = require('crypto');
+
 // Simple CSRF token endpoint for Vercel
-export default function handler(req, res) {
+module.exports = async (req, res) => {
     // Set CORS headers
     res.setHeader('Access-Control-Allow-Credentials', true);
     res.setHeader('Access-Control-Allow-Origin', '*');
@@ -19,7 +21,6 @@ export default function handler(req, res) {
 
     try {
         // Generate a simple CSRF token
-        const crypto = require('crypto');
         const token = crypto.randomBytes(32).toString('hex');
         
         console.log(`[CSRF] Generated token: ${token.substring(0, 8)}...`);
@@ -36,4 +37,4 @@ export default function handler(req, res) {
             message: 'Failed to generate CSRF token' 
         });
     }
-} 
+}; 
