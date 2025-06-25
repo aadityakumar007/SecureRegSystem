@@ -250,29 +250,20 @@ app.use((req, res, next) => {
     next();
 });
 
-// Start server (only if not in Vercel environment)
-if (process.env.NODE_ENV !== 'production' || !process.env.VERCEL) {
-    const PORT = config.port || 3000;
-    app.listen(PORT, () => {
-        console.log(`[Server] Server is running on port ${PORT}`);
-        console.log(`[Server] Available routes:`);
-        console.log(`  - POST /api/auth/login`);
-        console.log(`  - POST /api/auth/register`);
-        console.log(`  - POST /api/auth/verify-otp`);
-        console.log(`  - POST /api/auth/change-password`);
-        console.log(`  - GET  /api/user/verify-token`);
-        console.log(`  - GET  /api/user/info`);
-        console.log(`  - GET  /api/user/logs`);
-        
-        // Start password expiry checker
-        passwordExpiryChecker.start();
-        console.log(`[Server] Password expiry monitoring started (30-day expiry policy)`);
-    });
-} else {
-    // Initialize password expiry checker for serverless
+// Start server
+const PORT = config.port || 3000;
+app.listen(PORT, () => {
+    console.log(`[Server] Server is running on port ${PORT}`);
+    console.log(`[Server] Available routes:`);
+    console.log(`  - POST /api/auth/login`);
+    console.log(`  - POST /api/auth/register`);
+    console.log(`  - POST /api/auth/verify-otp`);
+    console.log(`  - POST /api/auth/change-password`);
+    console.log(`  - GET  /api/user/verify-token`);
+    console.log(`  - GET  /api/user/info`);
+    console.log(`  - GET  /api/user/logs`);
+    
+    // Start password expiry checker
     passwordExpiryChecker.start();
-    console.log(`[Server] Password expiry monitoring initialized for serverless`);
-}
-
-// Export the app for Vercel
-module.exports = app;
+    console.log(`[Server] Password expiry monitoring started (30-day expiry policy)`);
+});

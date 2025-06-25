@@ -5,13 +5,7 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "dev": "nodemon src/server.js",
-    "build": "echo 'No build step required for Node.js serverless deployment'",
-    "vercel-build": "echo 'Build completed successfully - Ready for serverless deployment'",
-    "test": "echo 'Tests not implemented yet'",
-    "lint": "echo 'Linting not configured yet'",
-    "deploy": "vercel --prod",
-    "deploy-dev": "vercel"
+    "dev": "nodemon src/server.js"
   },
   "dependencies": {
     "bcrypt": "^6.0.0",
