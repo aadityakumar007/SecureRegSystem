@@ -1,0 +1,438 @@
+/* Dashboard Dark Theme Override */
+
+/* Core Dashboard Dark Theme Variables */
+:root {
+    --bg-primary: #2e3944 !important;
+    --bg-secondary: #212a31 !important;
+    --bg-overlay: rgba(33, 42, 49, 0.95) !important;
+    --text-primary: #d3d9d4 !important;
+    --text-secondary: #748d92 !important;
+    --text-tertiary: #124e66 !important;
+    --border-primary: #124e66 !important;
+    --border-secondary: rgba(18, 78, 102, 0.3) !important;
+    --gray-50: rgba(18, 78, 102, 0.1) !important;
+    --gray-100: rgba(18, 78, 102, 0.2) !important;
+    --gray-200: rgba(18, 78, 102, 0.3) !important;
+    --gray-300: rgba(18, 78, 102, 0.4) !important;
+    --gray-500: #748d92 !important;
+    --gray-600: #d3d9d4 !important;
+    --gray-700: #d3d9d4 !important;
+    --gray-900: #ffffff !important;
+}
+
+/* Dashboard Header */
+.dashboard-header {
+    background: #2e3944 !important;
+    border: 1px solid #124e66 !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 20px rgba(18, 78, 102, 0.3) !important;
+}
+
+.dashboard-title {
+    color: #d3d9d4 !important;
+}
+
+.user-welcome {
+    color: #748d92 !important;
+}
+
+/* Dashboard Cards */
+.dashboard-card {
+    background: #2e3944 !important;
+    border: 1px solid #124e66 !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 20px rgba(18, 78, 102, 0.3) !important;
+}
+
+.dashboard-card:hover {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 30px rgba(18, 78, 102, 0.4) !important;
+}
+
+.card-header {
+    border-bottom: 1px solid #124e66 !important;
+}
+
+.card-title {
+    color: #d3d9d4 !important;
+}
+
+/* Info Items */
+.info-item {
+    border-bottom: 1px solid rgba(18, 78, 102, 0.3) !important;
+}
+
+.info-label {
+    color: #d3d9d4 !important;
+}
+
+.info-value {
+    color: #748d92 !important;
+}
+
+/* Stats Grid */
+.stat-item {
+    background: rgba(18, 78, 102, 0.2) !important;
+    border: 1px solid #124e66 !important;
+}
+
+.stat-number {
+    color: #d3d9d4 !important;
+}
+
+.stat-label {
+    color: #748d92 !important;
+}
+
+/* Activity Items */
+.activity-item:hover {
+    background: rgba(18, 78, 102, 0.2) !important;
+}
+
+.activity-title {
+    color: #d3d9d4 !important;
+}
+
+.activity-time {
+    color: #748d92 !important;
+}
+
+/* Loading States */
+#loadingSpinner {
+    background: #2e3944 !important;
+    border: 1px solid #124e66 !important;
+}
+
+.loading-text {
+    color: #748d92 !important;
+}
+
+.spinner {
+    border: 6px solid #124e66 !important;
+    border-top: 6px solid #2dd4bf !important;
+}
+
+/* Error Message */
+#errorMessage {
+    background: #2e3944 !important;
+}
+
+/* Secondary Buttons */
+.action-btn.secondary {
+    background: rgba(18, 78, 102, 0.3) !important;
+    color: #748d92 !important;
+    border: 1px solid #124e66 !important;
+}
+
+.action-btn.secondary:hover {
+    background: rgba(18, 78, 102, 0.4) !important;
+    color: #d3d9d4 !important;
+}
+
+/* Device Management Styles */
+.device-item {
+    background: rgba(18, 78, 102, 0.2) !important;
+    border: 1px solid #124e66 !important;
+    border-radius: 12px !important;
+    margin-bottom: 12px !important;
+    padding: 16px !important;
+}
+
+.device-item:hover {
+    background: rgba(18, 78, 102, 0.3) !important;
+}
+
+.device-item.current {
+    border: 2px solid #2dd4bf !important;
+    background: rgba(45, 212, 191, 0.1) !important;
+}
+
+.device-name {
+    color: #d3d9d4 !important;
+    font-weight: 600 !important;
+}
+
+.device-specs {
+    color: #748d92 !important;
+}
+
+.device-location span {
+    color: #748d92 !important;
+}
+
+.device-ip {
+    color: #748d92 !important;
+}
+
+.current-device-label {
+    background: rgba(45, 212, 191, 0.2) !important;
+    color: #2dd4bf !important;
+    padding: 4px 8px !important;
+    border-radius: 6px !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+}
+
+/* Session Management Modal Enhancements */
+.session-overview h4 {
+    color: #d3d9d4 !important;
+}
+
+.session-details .detail-item {
+    color: #748d92 !important;
+}
+
+.session-details .detail-item strong {
+    color: #d3d9d4 !important;
+}
+
+.ip-address, .location {
+    color: #2dd4bf !important;
+    font-weight: 600 !important;
+}
+
+/* Device Management Cards */
+.device-info {
+    color: #748d92 !important;
+}
+
+.device-header {
+    margin-bottom: 8px !important;
+}
+
+.device-details {
+    flex: 1 !important;
+}
+
+.device-metadata small {
+    color: #748d92 !important;
+}
+
+/* Status Badges */
+.status-badge.active {
+    background: rgba(45, 212, 191, 0.2) !important;
+    color: #2dd4bf !important;
+}
+
+.status-badge.inactive {
+    background: rgba(116, 141, 146, 0.2) !important;
+    color: #748d92 !important;
+}
+
+/* Current IP and Location Display */
+.current-ip, #currentIP, [data-info="ip"] {
+    color: #2dd4bf !important;
+    font-weight: 600 !important;
+    background: rgba(45, 212, 191, 0.1) !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    border: 1px solid rgba(45, 212, 191, 0.3) !important;
+}
+
+.current-location, #currentLocation, [data-info="location"] {
+    color: #2dd4bf !important;
+    font-weight: 600 !important;
+    background: rgba(45, 212, 191, 0.1) !important;
+    padding: 2px 6px !important;
+    border-radius: 4px !important;
+    border: 1px solid rgba(45, 212, 191, 0.3) !important;
+}
+
+/* Notification Dropdown - Dark Theme */
+.notification-dropdown {
+    background: #2e3944 !important;
+    border: 1px solid #124e66 !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 20px rgba(18, 78, 102, 0.3) !important;
+    -webkit-backdrop-filter: blur(20px);
+    backdrop-filter: blur(20px);
+}
+
+.notification-header {
+    background: rgba(18, 78, 102, 0.3) !important;
+    border-bottom: 1px solid #124e66 !important;
+    color: #d3d9d4 !important;
+}
+
+.notification-item {
+    border-bottom: 1px solid rgba(18, 78, 102, 0.3) !important;
+    color: #748d92 !important;
+}
+
+.notification-item:hover {
+    background: rgba(18, 78, 102, 0.2) !important;
+}
+
+.notification-item.unread {
+    background: rgba(18, 78, 102, 0.15) !important;
+    border-left: 4px solid #124e66 !important;
+}
+
+.notification-item div {
+    color: #748d92 !important;
+}
+
+.notification-item div:first-child {
+    color: #d3d9d4 !important;
+    font-weight: 600;
+}
+
+/* SweetAlert2 Dark Theme */
+.swal2-popup {
+    background: #2e3944 !important;
+    border: 1px solid #124e66 !important;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 20px rgba(18, 78, 102, 0.3) !important;
+}
+
+.swal2-title {
+    color: #d3d9d4 !important;
+}
+
+.swal2-content {
+    color: #748d92 !important;
+}
+
+.swal2-html-container {
+    color: #748d92 !important;
+}
+
+.swal2-html-container div {
+    color: #748d92 !important;
+}
+
+.swal2-html-container strong {
+    color: #d3d9d4 !important;
+}
+
+.swal2-html-container p {
+    color: #748d92 !important;
+}
+
+.swal2-confirm {
+    background: linear-gradient(135deg, #124e66, #2dd4bf) !important;
+    border: none !important;
+    color: #d3d9d4 !important;
+    box-shadow: 0 4px 15px 0 rgba(18, 78, 102, 0.3) !important;
+}
+
+.swal2-confirm:hover {
+    background: linear-gradient(135deg, #2dd4bf, #124e66) !important;
+    transform: translateY(-2px) !important;
+}
+
+.swal2-cancel {
+    background: rgba(116, 141, 146, 0.2) !important;
+    border: 1px solid #748d92 !important;
+    color: #748d92 !important;
+}
+
+.swal2-cancel:hover {
+    background: rgba(116, 141, 146, 0.3) !important;
+    color: #d3d9d4 !important;
+}
+
+.swal2-deny {
+    background: linear-gradient(135deg, #dc2626, #ef4444) !important;
+    border: none !important;
+    color: #d3d9d4 !important;
+}
+
+.swal2-deny:hover {
+    background: linear-gradient(135deg, #ef4444, #dc2626) !important;
+}
+
+/* Icon colors for dark theme */
+.swal2-icon.swal2-warning {
+    border-color: #f59e0b !important;
+    color: #f59e0b !important;
+}
+
+.swal2-icon.swal2-error {
+    border-color: #ef4444 !important;
+    color: #ef4444 !important;
+}
+
+.swal2-icon.swal2-success {
+    border-color: #10b981 !important;
+    color: #10b981 !important;
+}
+
+.swal2-icon.swal2-info {
+    border-color: #3b82f6 !important;
+    color: #3b82f6 !important;
+}
+
+/* Progress bar for dark theme */
+.swal2-progress-steps {
+    color: #748d92 !important;
+}
+
+.swal2-progress-step {
+    background: #124e66 !important;
+}
+
+.swal2-progress-step.swal2-active-progress-step {
+    background: #2dd4bf !important;
+}
+
+/* Input styling for dark theme */
+.swal2-input {
+    background: #212a31 !important;
+    color: #d3d9d4 !important;
+    border: 2px solid #124e66 !important;
+}
+
+.swal2-input:focus {
+    border-color: #2dd4bf !important;
+    box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.2) !important;
+}
+
+/* Timer progress bar */
+.swal2-timer-progress-bar {
+    background: #2dd4bf !important;
+}
+
+/* Loading animation */
+.swal2-loader {
+    border-color: #2dd4bf transparent #2dd4bf transparent !important;
+}
+
+/* Toast notifications */
+.swal2-toast {
+    background: #2e3944 !important;
+    color: #d3d9d4 !important;
+    border: 1px solid #124e66 !important;
+}
+
+/* Modal overlay */
+.swal2-container {
+    background: rgba(0, 0, 0, 0.8) !important;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+
+/* Chart.js dark theme overrides */
+.chart-container canvas {
+    background: transparent !important;
+}
+
+/* Ensure all inline styles are overridden */
+[style*="color: #666"] {
+    color: #748d92 !important;
+}
+
+[style*="color: #999"] {
+    color: #748d92 !important;
+}
+
+[style*="background: #fef3c7"] {
+    background: rgba(18, 78, 102, 0.2) !important;
+}
+
+[style*="background: #eff6ff"] {
+    background: rgba(18, 78, 102, 0.2) !important;
+}
+
+[style*="background: #f0fdf4"] {
+    background: rgba(16, 185, 129, 0.1) !important;
+}
+
+[style*="background: #fef2f2"] {
+    background: rgba(239, 68, 68, 0.1) !important;
+} 

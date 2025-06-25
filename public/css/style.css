@@ -1,0 +1,165 @@
+/* Password Strength Meter */
+.password-strength {
+    margin-top: 5px;
+}
+
+.strength-meter {
+    height: 5px;
+    background-color: #eee;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+#strength-bar {
+    height: 100%;
+    width: 0;
+    transition: all 0.3s ease;
+}
+
+#strength-text {
+    font-size: 12px;
+    margin-top: 5px;
+    transition: all 0.3s ease;
+}
+
+/* Form Group Spacing */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.form-group input[type="password"],
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.form-group input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* MFA Verification Styles */
+.mfa-info {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.mfa-info p {
+    margin: 5px 0;
+    color: #666;
+}
+
+.email-display {
+    font-weight: bold;
+    color: #333;
+    margin: 10px 0;
+}
+
+.timer-container {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.timer-container p {
+    color: #666;
+    font-size: 0.9em;
+}
+
+#timer {
+    font-weight: bold;
+    color: #e74c3c;
+}
+
+.resend-container {
+    text-align: center;
+    margin: 15px 0;
+}
+
+.resend-container p {
+    color: #666;
+    font-size: 0.9em;
+}
+
+.resend-container a {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.resend-container a:hover {
+    text-decoration: underline;
+}
+
+.otp-input-container {
+    margin: 20px 0;
+}
+
+.otp-input {
+    width: 40px !important;
+    height: 40px !important;
+    text-align: center;
+    font-size: 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    margin: 0 5px;
+    transition: border-color 0.3s;
+}
+
+.otp-input:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.btn-primary {
+    background-color: #3498db;
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2980b9;
+}
+
+.btn-primary:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+}
+
+.btn-secondary {
+    background-color: #95a5a6;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #7f8c8d;
+}
+
+.error-message {
+    color: #e74c3c;
+    text-align: center;
+    margin: 10px 0;
+    min-height: 20px;
+} 

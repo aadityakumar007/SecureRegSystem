@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two-Factor Authentication - Secure System</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/otp-verification.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-container otp-container">
+            <div class="auth-header">
+                <div class="otp-icon">
+                    <i class="fas fa-shield-alt" aria-hidden="true"></i>
+                </div>
+                <h1>Two-Factor Authentication</h1>
+                <p>Enter the 6-digit verification code sent to your email</p>
+            </div>
+            
+            <form class="auth-form" novalidate>
+                <div class="form-group">
+                    <label class="form-label sr-only">Verification Code</label>
+                    <div class="otp-inputs" role="group" aria-label="6-digit verification code">
+                        <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" aria-label="Digit 1 of 6" autocomplete="one-time-code">
+                        <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" aria-label="Digit 2 of 6" autocomplete="one-time-code">
+                        <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" aria-label="Digit 3 of 6" autocomplete="one-time-code">
+                        <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" aria-label="Digit 4 of 6" autocomplete="one-time-code">
+                        <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" aria-label="Digit 5 of 6" autocomplete="one-time-code">
+                        <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" inputmode="numeric" aria-label="Digit 6 of 6" autocomplete="one-time-code">
+                    </div>
+                    <div id="otp-error" class="error-message" role="alert" style="display: none;"></div>
+                </div>
+                
+                <div class="timer-container">
+                    <div class="timer-circle" aria-label="Time remaining">
+                        <svg class="timer-svg" viewBox="0 0 100 100" aria-hidden="true">
+                            <circle class="timer-background" cx="50" cy="50" r="45"></circle>
+                            <circle class="timer-progress" cx="50" cy="50" r="45"></circle>
+                        </svg>
+                        <span id="otpTimer" aria-live="polite" aria-label="Time remaining">2:00</span>
+                    </div>
+                </div>
+                
+                <div class="resend-container">
+                    <p>Didn't receive the code? 
+                        <a href="#" id="resendLink" class="resend-link" aria-describedby="resend-help">
+                            Resend Code
+                        </a>
+                    </p>
+                    <div id="resend-help" class="sr-only">Click to send a new verification code to your email</div>
+                </div>
+                
+                <div class="form-group">
+                    <button type="button" id="verifyOtp" class="btn btn-primary verify-btn btn-full">
+                        <i class="fas fa-check" aria-hidden="true"></i> 
+                        Verify Code
+                </button>
+                    
+                    <button type="button" id="resendCode" class="btn btn-secondary resend-btn btn-full" disabled>
+                        <i class="fas fa-redo" aria-hidden="true"></i> 
+                        Resend Code
+                </button>
+            </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Enhanced Modal for messages -->
+    <div id="messageModal" class="modal" role="dialog" aria-labelledby="modalTitle" aria-describedby="modalMessage" aria-hidden="true">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle">Notification</h2>
+            </div>
+            <div class="modal-body">
+                <p id="modalMessage">Message content</p>
+            </div>
+            <div class="modal-footer">
+                <button id="modalClose" class="btn btn-primary" autofocus>
+                    <i class="fas fa-check" aria-hidden="true"></i>
+                    OK
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/utils.js?v=1.0.4"></script>
+    <script src="js/validation.js?v=1.0.4"></script>
+    <script src="js/otp-verification.js?v=1.0.5"></script>
+    
+    <script>
+        // Enhanced OTP input functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const otpInputs = document.querySelectorAll('.otp-input');
+            const errorDiv = document.getElementById('otp-error');
+            
+            // Enhanced OTP input handling
+            otpInputs.forEach((input, index) => {
+                input.addEventListener('input', function(e) {
+                    const value = e.target.value;
+                    
+                    // Only allow numbers
+                    if (!/^\d*$/.test(value)) {
+                        e.target.value = value.replace(/[^\d]/g, '');
+                        return;
+                    }
+                    
+                    // Visual feedback for filled inputs
+                    if (value) {
+                        e.target.classList.add('filled');
+                        // Auto-focus next input
+                        if (index < otpInputs.length - 1) {
+                            otpInputs[index + 1].focus();
+                        }
+                    } else {
+                        e.target.classList.remove('filled');
+                    }
+                    
+                    // Clear any errors when user starts typing
+                    clearOTPError();
+                });
+                
+                input.addEventListener('keydown', function(e) {
+                    // Handle backspace
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        otpInputs[index - 1].focus();
+                        otpInputs[index - 1].value = '';
+                        otpInputs[index - 1].classList.remove('filled');
+                    }
+                    
+                    // Handle arrow keys
+                    if (e.key === 'ArrowLeft' && index > 0) {
+                        otpInputs[index - 1].focus();
+                    }
+                    if (e.key === 'ArrowRight' && index < otpInputs.length - 1) {
+                        otpInputs[index + 1].focus();
+                    }
+                });
+                
+                input.addEventListener('paste', function(e) {
+                    e.preventDefault();
+                    const pastedData = e.clipboardData.getData('text').replace(/[^\d]/g, '');
+                    
+                    if (pastedData.length === 6) {
+                        otpInputs.forEach((otpInput, i) => {
+                            otpInput.value = pastedData[i] || '';
+                            if (pastedData[i]) {
+                                otpInput.classList.add('filled');
+                            }
+                        });
+                    }
+                });
+            });
+            
+            // Enhanced error handling
+            function showOTPError(message) {
+                if (errorDiv) {
+                    errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i>${message}`;
+                    errorDiv.style.display = 'flex';
+                    
+                    // Add error state to inputs
+                    otpInputs.forEach(input => {
+                        input.classList.add('error');
+                    });
+                }
+            }
+            
+            function clearOTPError() {
+                if (errorDiv) {
+                    errorDiv.innerHTML = '';
+                    errorDiv.style.display = 'none';
+                    
+                    // Remove error state from inputs
+                    otpInputs.forEach(input => {
+                        input.classList.remove('error');
+                    });
+                }
+            }
+            
+            // Enhanced modal handling
+            const modal = document.getElementById('messageModal');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalMessage = document.getElementById('modalMessage');
+            const modalClose = document.getElementById('modalClose');
+            
+            function showModal(title, message, type = 'info') {
+                modalTitle.textContent = title;
+                modalMessage.textContent = message;
+                modal.style.display = 'flex';
+                modal.classList.add('show');
+                modal.setAttribute('aria-hidden', 'false');
+                modalClose.focus();
+                
+                // Add type-specific styling
+                modal.setAttribute('data-type', type);
+            }
+            
+            function hideModal() {
+                modal.style.display = 'none';
+                modal.classList.remove('show');
+                modal.setAttribute('aria-hidden', 'true');
+                modal.removeAttribute('data-type');
+            }
+            
+            modalClose.addEventListener('click', hideModal);
+            
+            // Close modal on escape key
+            modal.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape') {
+                    hideModal();
+                }
+            });
+            
+            // Close modal on backdrop click
+            modal.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    hideModal();
+                }
+            });
+            
+            // Enhanced timer display
+            function updateTimer(timeString, percentage) {
+                const timer = document.getElementById('otpTimer');
+                const progress = document.querySelector('.timer-progress');
+                
+                if (timer) {
+                    timer.textContent = timeString;
+                    
+                    // Update progress circle
+                    if (progress) {
+                        const circumference = 2 * Math.PI * 45;
+                        const offset = circumference * (1 - percentage / 100);
+                        progress.style.strokeDashoffset = offset;
+                        
+                        // Add warning/danger classes based on time
+                        progress.classList.remove('warning', 'danger');
+                        timer.classList.remove('warning', 'danger');
+                        
+                        if (percentage < 25) {
+                            progress.classList.add('danger');
+                            timer.classList.add('danger');
+                        } else if (percentage < 50) {
+                            progress.classList.add('warning');
+                            timer.classList.add('warning');
+                        }
+                    }
+                }
+            }
+            
+            // Expose functions globally for existing JavaScript
+            window.showOTPError = showOTPError;
+            window.clearOTPError = clearOTPError;
+            window.showModal = showModal;
+            window.hideModal = hideModal;
+            window.updateTimer = updateTimer;
+        });
+    </script>
+</body>
+</html> 

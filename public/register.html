@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account - Secure System</title>
+    <link rel="stylesheet" href="/css/styles.css?v=1.7.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://www.google.com/recaptcha/api.js?onload=onRecaptchaLoad" async defer></script>
+    <script>
+        function onRecaptchaLoad() {
+            console.log('reCAPTCHA loaded');
+        }
+    </script>
+</head>
+<body>
+    <div class="auth-wrapper">
+        <div class="auth-container" style="max-width: 500px;">
+            <div class="auth-header">
+                <h1>
+                    <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    Create Account
+                </h1>
+                <p>Join SecureSystem today</p>
+            </div>
+            
+            <form id="registerForm" class="auth-form" novalidate>
+                <div class="form-group">
+                    <label for="username" class="form-label">Username</label>
+                    <div class="input-group">
+                        <input 
+                            type="text" 
+                            id="username" 
+                            name="username" 
+                            class="form-input" 
+                               placeholder="Choose a username"
+                            required 
+                               autocomplete="username"
+                            aria-describedby="username-error"
+                        >
+                        <i class="fas fa-user" aria-hidden="true"></i>
+                    </div>
+                    <div id="username-error" class="form-error" role="alert"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email" class="form-label">Email Address</label>
+                    <div class="input-group">
+                        <input 
+                            type="email" 
+                            id="email" 
+                            name="email" 
+                            class="form-input" 
+                               placeholder="Enter your email address"
+                            required 
+                               autocomplete="email"
+                            aria-describedby="email-error"
+                        >
+                        <i class="fas fa-envelope" aria-hidden="true"></i>
+                    </div>
+                    <div id="email-error" class="form-error" role="alert"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password" class="form-label">Password</label>
+                    <div class="password-container">
+                        <div class="input-group">
+                            <input 
+                                type="password" 
+                                id="password" 
+                                name="password" 
+                                class="form-input" 
+                                placeholder="Create a strong password"
+                                required 
+                               autocomplete="new-password"
+                                aria-describedby="password-error password-strength"
+                            >
+                            <i class="fas fa-lock" aria-hidden="true"></i>
+                        </div>
+                        <button 
+                            type="button" 
+                            class="password-toggle" 
+                            id="generatePassword" 
+                            title="Generate secure password"
+                            aria-label="Generate secure password"
+                        >
+                            <i class="fas fa-key" aria-hidden="true"></i>
+                        </button>
+                    </div>
+                    <div class="password-strength" id="password-strength" aria-live="polite">
+                        <div class="strength-meter">
+                            <div class="strength-bar" id="strength-bar"></div>
+                        </div>
+                        <div class="strength-text" id="strength-text">Enter password to see strength</div>
+                    </div>
+                    <div id="password-error" class="form-error" role="alert"></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <div class="password-container">
+                        <div class="input-group">
+                            <input 
+                                type="password" 
+                                id="confirmPassword" 
+                                name="confirmPassword" 
+                                class="form-input" 
+                               placeholder="Confirm your password"
+                                required 
+                               autocomplete="new-password"
+                                aria-describedby="confirm-password-error"
+                            >
+                            <i class="fas fa-lock" aria-hidden="true"></i>
+                        </div>
+                    </div>
+                    <div id="confirm-password-error" class="form-error" role="alert"></div>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="showPasswords" name="showPasswords">
+                        <label for="showPasswords">
+                            <i class="fas fa-eye" aria-hidden="true"></i> 
+                            Show passwords
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="g-recaptcha" class="form-label">Security Verification</label>
+                    <div class="recaptcha-container">
+                    <div class="g-recaptcha" data-sitekey="6LegBVwrAAAAAPuAvRyJ8JsBS0uVylcmYyyvC6JD"></div>
+                    </div>
+                    <div id="recaptcha-error" class="form-error" role="alert"></div>
+                </div>
+                
+                <div id="error" class="error-message" role="alert" style="display: none;"></div>
+                <div id="success" class="success-message" role="alert" style="display: none;"></div>
+                
+                <button type="submit" class="btn btn-primary btn-full" id="registerButton">
+                    <i class="fas fa-user-plus" aria-hidden="true"></i>
+                    Create Account
+                </button>
+            </form>
+            
+            <div class="auth-footer">
+                <p>
+                    Already have an account? 
+                    <a href="/login.html" class="link">
+                        <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+                        Sign In
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/utils.js?v=1.6.0"></script>
+    <script src="/js/validation.js?v=1.6.0"></script>
+    <script src="/js/register.js?v=1.6.0"></script>
+    <script>
+        // Enhanced password visibility toggle for register form
+        document.addEventListener('DOMContentLoaded', function() {
+            const showPasswordsCheckbox = document.getElementById('showPasswords');
+            const passwordInput = document.getElementById('password');
+            const confirmPasswordInput = document.getElementById('confirmPassword');
+            const generatePasswordBtn = document.getElementById('generatePassword');
+            
+            // Toggle password visibility
+            showPasswordsCheckbox.addEventListener('change', function() {
+                const type = this.checked ? 'text' : 'password';
+                passwordInput.type = type;
+                confirmPasswordInput.type = type;
+                
+                const icon = this.nextElementSibling.querySelector('i');
+                if (this.checked) {
+                    icon.classList.remove('fa-eye');
+                    icon.classList.add('fa-eye-slash');
+                } else {
+                    icon.classList.remove('fa-eye-slash');
+                    icon.classList.add('fa-eye');
+                }
+            });
+            
+            // Generate password functionality (placeholder - integrate with existing password generator)
+            generatePasswordBtn.addEventListener('click', function() {
+                // This should integrate with the existing password generation logic
+                const event = new CustomEvent('generatePassword');
+                document.dispatchEvent(event);
+            });
+            
+            // Enhanced form validation display
+            function showError(inputId, message) {
+                const input = document.getElementById(inputId);
+                const errorDiv = document.getElementById(inputId + '-error');
+                
+                if (input && errorDiv) {
+                    input.classList.add('error');
+                    errorDiv.innerHTML = `<i class="fas fa-exclamation-circle"></i>${message}`;
+                    errorDiv.style.display = 'flex';
+                }
+            }
+            
+            function showSuccess(inputId, message) {
+                const input = document.getElementById(inputId);
+                const errorDiv = document.getElementById(inputId + '-error');
+                
+                if (input && errorDiv) {
+                    input.classList.remove('error');
+                    input.classList.add('success');
+                    errorDiv.innerHTML = `<i class="fas fa-check-circle"></i>${message}`;
+                    errorDiv.classList.remove('form-error');
+                    errorDiv.classList.add('form-success');
+                    errorDiv.style.display = 'flex';
+                }
+            }
+            
+            function clearError(inputId) {
+                const input = document.getElementById(inputId);
+                const errorDiv = document.getElementById(inputId + '-error');
+                
+                if (input && errorDiv) {
+                    input.classList.remove('error', 'success');
+                    errorDiv.innerHTML = '';
+                    errorDiv.classList.remove('form-success');
+                    errorDiv.classList.add('form-error');
+                    errorDiv.style.display = 'none';
+                }
+            }
+            
+            // Expose functions globally for existing JavaScript
+            window.showError = showError;
+            window.showSuccess = showSuccess;
+            window.clearError = clearError;
+            
+            // Enhanced password strength display
+            function updatePasswordStrength(strength, text) {
+                const strengthBar = document.getElementById('strength-bar');
+                const strengthText = document.getElementById('strength-text');
+                
+                if (strengthBar && strengthText) {
+                    // Remove all strength classes
+                    strengthBar.classList.remove('weak', 'average', 'strong', 'very_strong');
+                    strengthText.classList.remove('weak', 'average', 'strong', 'very_strong');
+                    
+                    // Add current strength class
+                    if (strength) {
+                        strengthBar.classList.add(strength);
+                        strengthText.classList.add(strength);
+                    }
+                    
+                    strengthText.textContent = text || 'Enter password to see strength';
+                }
+            }
+            
+            // Expose password strength function globally
+            window.updatePasswordStrength = updatePasswordStrength;
+            
+            // Force reinitialize to ensure no cached conflicts
+            const form = document.getElementById('registerForm');
+            if (form && !form.hasAttribute('data-initialized')) {
+                console.log('Form not initialized, setting up handlers');
+                form.setAttribute('data-initialized', 'true');
+                
+                // Ensure form submission is handled
+                form.addEventListener('submit', function(e) {
+                    console.log('Form submit intercepted');
+                    e.preventDefault();
+                    // Let the main register.js handler run
+                });
+            }
+        });
+    </script>
+</body>
+</html>
